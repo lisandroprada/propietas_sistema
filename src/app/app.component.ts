@@ -1,3 +1,5 @@
+
+import { SettingsService } from './services/service.index';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'propietas';
+  constructor( public _ajustes: SettingsService) {
+    _ajustes.guardarAjustes();
+  }
 }
