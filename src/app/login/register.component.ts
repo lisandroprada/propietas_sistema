@@ -1,4 +1,13 @@
+import { UsuarioService } from './../services/service.index';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import Swal from 'sweetalert2';
+import { Usuario } from '../models/usuario.model';
+import { Router } from '@angular/router';
+
+declare function init_plugins();
+
 
 @Component({
   selector: 'app-register',
@@ -7,9 +16,76 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  forma: FormGroup;
+
+  constructor(public _usuarioService: UsuarioService,
+              public _router: Router) { }
+
+  sonIguales(campo1: string, campo2: string){
+
+
+    return ( group: FormGroup ) => {
+      const pass1 = group.controls[campo1].value;
+      const pass2 = group.controls[campo2].value;
+
+      if ( pass1 === pass2 ) {
+        return null;
+      }
+
+      return {
+        sonIguales: true
+      };
+    };
+  }
 
   ngOnInit(): void {
+    init_plugins();
+
+    this.forma = new FormGroup({
+      nombre: new FormControl(null, Validators.required),
+      correo: new FormControl(null, [Validators.email, Validators.required]),
+      password: new FormControl(null, Validators.minLength(3)),
+      password2: new FormControl(null, Validators.minLength(3)),
+      condiciones: new FormControl(false)
+    }, { validators: this.sonIguales('password', 'password2') });
+
+    this.forma.setValue({
+      nombre: 'Lisandro',
+      correo: 'lisandro@gmaio.com',
+      password: '12345',
+      password2: '12345',
+      condiciones: true
+    });
+
+  }
+
+  registrarUsuario() {
+    if (this.forma.invalid) {
+      return;
+    }
+    if (!this.forma.value.condiciones) {
+      Swal.fire({
+        title: 'Importante',
+        text: 'Debe aceptar las condiciones',
+        icon: 'warning'
+      });
+      return;
+    }
+
+    // console.log(this.forma.value);
+
+    const usuario = new Usuario(
+      this.forma.value.nombre,
+      this.forma.value.correo,
+      this.forma.value.password
+    );
+
+    this._usuarioService.crearUsuario(usuario)
+    .subscribe(resp => {
+      console.log(resp);
+      this._router.navigate(['/login']);
+    });
+
   }
 
 }
