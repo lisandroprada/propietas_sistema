@@ -19,7 +19,7 @@ export class UsuarioService {
   constructor( private http: HttpClient,
                public _router: Router,
                public _subirArchivo: SubirArchivoService) {
-    console.log('Servicio usuario inicializado');
+
     this.cargarStorage();
   }
 
@@ -108,14 +108,15 @@ export class UsuarioService {
     let url = URL_SERVICIOS + '/usuario/' + usuario._id;
     url += '?token=' + this.token;
 
-    // console.log( url );
-
     return this.http.put(url, usuario).
         pipe( map( (resp: any) => {
-          // this.usuario = resp.usuario;
-          let usuarioDB: Usuario = resp;
 
+          if (usuario._id === this.usuario._id) {
+          let usuarioDB: Usuario = resp;
           this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+          }
+
+
           Swal.fire({
             title: 'Usuario actualizado',
             text: usuario.nombre,
@@ -140,6 +141,26 @@ export class UsuarioService {
     .catch ( resp => {
       console.log( resp );
     });
+  }
+
+  cargarUsuarios(desde: number = 0, ) {
+    let url  = URL_SERVICIOS + '/usuario?desde=' + desde;
+    return this.http.get(url);
+  }
+
+  buscarUsuarios(termino: string) {
+    let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
+    return this.http.get(url)
+    .pipe(map( ( resp: any )  => resp.usuarios
+    ));
+  }
+
+  borrarUsuario( id: string) {
+    let url = URL_SERVICIOS + '/usuario/' + id;
+    url += '?token=' + this.token;
+    console.log(url);
+
+    return this.http.delete(url);
   }
 }
 
