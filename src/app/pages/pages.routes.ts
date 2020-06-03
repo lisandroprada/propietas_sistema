@@ -1,3 +1,5 @@
+import { MedicosComponent } from './medicos/medicos.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
@@ -11,6 +13,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
 
 import { LoginGuardGuard } from '../services/guards/login-guard.guard';
+import { MedicoComponent } from './medicos/medico.component';
 
 const pagesRoutes: Routes = [
     {
@@ -26,7 +29,10 @@ const pagesRoutes: Routes = [
                     {path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Ajustes'}},
                     {path: 'profile', component: ProfileComponent, data: {titulo: 'Perfil de usuario'}},
                     // Mantenimientos
-                    {path: 'usuarios', component: UsuariosComponent, data: {titulo: 'Mantenimiento de usuarios'}},
+                    {path: 'usuarios', component: UsuariosComponent, data: {titulo: 'Mantenimiento de Usuarios'}},
+                    {path: 'hospitales', component: HospitalesComponent, data: {titulo: 'Mantenimiento de Hospitales'}},
+                    {path: 'medicos', component: MedicosComponent, data: {titulo: 'Mantenimiento de Médicos'}},
+                    {path: 'medico/:id', component: MedicoComponent, data: {titulo: 'Actualizar Médico'}},
                     {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
         ]
       }

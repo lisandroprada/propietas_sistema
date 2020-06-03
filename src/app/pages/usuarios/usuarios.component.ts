@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class UsuariosComponent implements OnInit {
 
-  usuarios: Usuario[] =[];
+  usuarios: Usuario[] = [];
   desde: number = 0;
   totalRegistros: number = 0;
 
@@ -24,7 +24,7 @@ export class UsuariosComponent implements OnInit {
   ngOnInit(): void {
     this.cargarUsuarios();
     this._modalUploadService.notificacion
-    .subscribe( resp =>{
+    .subscribe( resp => {
       this.cargarUsuarios();
     });
   }
