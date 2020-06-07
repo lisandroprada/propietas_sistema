@@ -19,7 +19,7 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+// import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 import { HospitalesComponent } from './hospitales/hospitales.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
@@ -29,7 +29,6 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
  declarations: [
     DashboardComponent,
     ProgressComponent,
-    PagesComponent,
     IncrementadorComponent,
     Graficas1Component,
     GraficoDonaComponent,
@@ -38,7 +37,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     RxjsComponent,
     ProfileComponent,
     UsuariosComponent,
-    ModalUploadComponent,
+    // ModalUploadComponent,
     HospitalesComponent,
     MedicosComponent,
     MedicoComponent,
@@ -47,8 +46,8 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
  exports: [
      DashboardComponent,
      ProgressComponent,
-     Graficas1Component,
-     PagesComponent
+     Graficas1Component
+    //  PagesComponent
  ],
  imports: [
      CommonModule,

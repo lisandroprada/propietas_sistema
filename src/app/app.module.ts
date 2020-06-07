@@ -1,3 +1,5 @@
+import { SharedModule } from './shared/shared.module';
+import { PagesComponent } from './pages/pages.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -23,15 +25,17 @@ import { RegisterComponent } from './login/register.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,
     APP_ROUTES,
-    PagesModule,
+    // PagesModule,
     FormsModule,
     ServiceModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
